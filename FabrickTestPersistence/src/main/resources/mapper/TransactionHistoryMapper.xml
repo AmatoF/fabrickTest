@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.TransactionHistory">
+
+    <insert id="insertIntoTransactionHistory" parameterType="java.util.List">
+        INSERT INTO transaction_history(transactionId,operationId,accountingDate,valueDate,typeenumeration,typevalue,amount,currency,description)
+        VALUES
+        <foreach collection="transactionList" item="element" index="index" open="(" separator="),("  close=")">
+            #{element.transactionId},
+            #{element.operationId},
+            #{element.accountingDate},
+            #{element.valueDate},
+            #{element.type.enumeration},
+            #{element.type.value},
+            #{element.amount},
+            #{element.currency},
+            #{element.description},
+        </foreach>
+    </insert>
+</mapper>
